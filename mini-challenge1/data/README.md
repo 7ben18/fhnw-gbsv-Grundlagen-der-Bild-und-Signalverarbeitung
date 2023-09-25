@@ -2,6 +2,8 @@
 
 Hier befinden sich die Daten für die gbsv Mini Challenge 1
 
+# Bilder 
+
 | Datei | Quelle |
 | --- | --- |
 | 1 | https://www.holidaycheck.ch/ferien/aegypten | 
@@ -27,3 +29,17 @@ Hier befinden sich die Daten für die gbsv Mini Challenge 1
 | 23 | Generiert von Dall-E, prompt: Generate a picture from egypt |
 | 24 | Generiert von Dall-E, prompt: Generate a picture from egypt |
 | 25 | Generiert von Dall-E, prompt: Generate a picture from egypt + Variations | 
+
+# Signale
+
+Teilaufnahme von Ägyptischen Musik Lieder mit dem Handy.
+
+| Datei | Quelle |
+| --- | --- |
+| 1 | Generiert von [Veed](https://www.veed.io/tools/ai-music-generator), vibe: Chill, prompt: Egyptian Music | 
+| 2 | https://pixabay.com/music/world-night-of-egypt-4805/ | 
+| 3 | https://pixabay.com/music/ambient-egypt-expedition-the-kingdom-119123/ | 
+| 4 | https://pixabay.com/music/world-egypt-jelly-dance-131475/ | 
+| 5 | https://pixabay.com/music/world-egypt-ethnic-arabic-cinematic-background-music-136331/ | 
+| test | Test File von vta mc2 | 
+ 
