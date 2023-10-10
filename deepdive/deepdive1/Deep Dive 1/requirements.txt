@@ -1,0 +1,11 @@
+librosa
+matplotlib
+ipympl
+numpy
+opencv-python
+Pillow
+scipy
+scikit-image
+sounddevice
+notebook
+
