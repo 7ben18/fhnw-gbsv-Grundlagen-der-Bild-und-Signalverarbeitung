@@ -30,6 +30,7 @@ Hier befinden sich die Daten für die gbsv Mini Challenge 1 und deren Quellen.
 | 24    | Generiert von Dall-E, prompt: Generate a picture from egypt                                                                         |
 | 25    | Generiert von Dall-E, prompt: Generate a picture from egypt + Variations                                                            |
 | 26    | https://vista.ch/einblick/augensymbole/                                                                                             |
+| 27    | https://stock.adobe.com/de/images/agyptische-sonne-mit-handen/53614636                                                              |
 
 ## Signale
 
