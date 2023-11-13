@@ -1,0 +1,8 @@
+ipympl
+matplotlib
+numpy
+notebook
+opencv-python
+scipy
+scikit-image
+statsmodels
