@@ -20,6 +20,7 @@ Folgende Dokumente sind in diesem Ordner abgelegt.
 | Datei                             | Beschreibung                                                                 |
 | --------------------------------- | ---------------------------------------------------------------------------- |
 | `gbsv-mc1-ben.ipynb`              | Jupyter Notebook mit der Lösung der Mini-Challenge 1                         |
+| `gbsv-mc1-ben.html`               | HTML Export des Jupyter Notebooks                                            |
 | `gbsv-Report-2023-11-03-ben.docx` | Report docx gbsv                                                             |
 | `gbsv-Report-2023-11-03-ben.pdf`  | Report pdf gbsv                                                              |
 | `data`                            | Ordner mit den Daten für die Mini-Challenge 1                                |
