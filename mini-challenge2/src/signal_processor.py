@@ -5,6 +5,17 @@ from scipy import signal
 
 
 def slice_signal(data, slice_length, random_seed=42):
+    """
+    Slice a signal or data series randomly.
+
+    Args:
+        data (pd.DataFrame): The input data containing a 'signal' column.
+        slice_length (int): The length of the sliced signal.
+        random_seed (int, optional): Random seed for reproducibility. Default is 42.
+
+    Returns:
+        pd.Series: The sliced signal.
+    """
     signal_length = len(data)
     np.random.seed(random_seed)
     start_position = np.random.randint(0, signal_length - slice_length)
@@ -13,6 +24,18 @@ def slice_signal(data, slice_length, random_seed=42):
 
 
 def plot_data_and_correlation(data, sliced_data, data_name, single_row=True):
+    """
+    Plot original and sliced data, cross-correlation, and normalized cross-correlation.
+
+    Args:
+        data (pd.DataFrame): The original data.
+        sliced_data (pd.DataFrame): The sliced data.
+        data_name (str): Name or label for the data being analyzed.
+        single_row (bool, optional): Whether to arrange the plots in a single row. Default is True.
+
+    Returns:
+        None
+    """
     corr = signal.correlate(data["signal"], sliced_data["signal"], mode="same")
     corr_norm = corr / np.max(corr)
 
@@ -63,6 +86,31 @@ def plot_data_and_correlation(data, sliced_data, data_name, single_row=True):
 
 
 class SignalProcessor:
+    """
+    SignalProcessor is a class for processing and manipulating signal data.
+
+    This class provides various methods for modifying signal data, including adding noise, multiplying by noise,
+    adding random noise, multiplying by random noise, standardizing, normalizing, shuffling, reversing, and
+    log-transforming the signal.
+
+    Parameters:
+    - data (pd.Series): A Pandas Series containing the signal data. The Series should have a "signal" column
+
+    Methods:
+    - addition_noise(noise=0.25): Add a constant value of noise to the signal.
+    - multiply_noise(noise=0.25): Multiply the signal by a constant noise value.
+    - add_random_noise(noise_amplitude=0.25, random_seed=42): Add random noise to the signal.
+    - multiply_random_noise(noise_amplitude=0.25, random_seed=42): Multiply the signal by random noise.
+    - standardize_signal(): Standardize the signal by subtracting the mean and dividing by the standard deviation.
+    - normalize_min_max_signal(): Normalize the signal to a range of [0, 1].
+    - shuffle_signal(random_seed=42): Shuffle the order of signal values.
+    - reverse_signal(): Reverse the order of signal values.
+    - log_transform_signal(): Apply a log transformation to the signal.
+
+    Note: The original data is not modified by any of these methods, and a modified copy of the data
+    is returned.
+    """
+
     def __init__(self, data):
         self.data = data
 
@@ -71,52 +119,60 @@ class SignalProcessor:
 
     def addition_noise(self, noise=0.25):
         modified_data = self._copy_data()
-        modified_data['signal'] = modified_data['signal'] + noise
+        modified_data["signal"] = modified_data["signal"] + noise
         return modified_data
 
     def multiply_noise(self, noise=0.25):
         modified_data = self._copy_data()
-        modified_data['signal'] = modified_data['signal'] * noise
+        modified_data["signal"] = modified_data["signal"] * noise
         return modified_data
 
     def add_random_noise(self, noise_amplitude=0.25, random_seed=42):
         np.random.seed(random_seed)
-        noise = noise_amplitude * np.random.normal(size=len(self.data), scale=noise_amplitude)
+        noise = noise_amplitude * np.random.normal(
+            size=len(self.data), scale=noise_amplitude
+        )
         modified_data = self._copy_data()
-        modified_data['signal'] = modified_data['signal'] + noise
+        modified_data["signal"] = modified_data["signal"] + noise
         return modified_data
 
     def multiply_random_noise(self, noise_amplitude=0.25, random_seed=42):
         np.random.seed(random_seed)
-        noise = noise_amplitude * np.random.normal(size=len(self.data), scale=noise_amplitude)
+        noise = noise_amplitude * np.random.normal(
+            size=len(self.data), scale=noise_amplitude
+        )
         modified_data = self._copy_data()
-        modified_data['signal'] = modified_data['signal'] * noise
+        modified_data["signal"] = modified_data["signal"] * noise
         return modified_data
 
     def standardize_signal(self):
         modified_data = self._copy_data()
-        modified_data['signal'] = (modified_data['signal'] - modified_data['signal'].mean()) / modified_data['signal'].std()
+        modified_data["signal"] = (
+            modified_data["signal"] - modified_data["signal"].mean()
+        ) / modified_data["signal"].std()
         return modified_data
 
     def normalize_min_max_signal(self):
         modified_data = self._copy_data()
-        modified_data['signal'] = (modified_data['signal'] - modified_data['signal'].min()) / (modified_data['signal'].max() - modified_data['signal'].min())
+        modified_data["signal"] = (
+            modified_data["signal"] - modified_data["signal"].min()
+        ) / (modified_data["signal"].max() - modified_data["signal"].min())
         return modified_data
 
     def shuffle_signal(self, random_seed=42):
         np.random.seed(random_seed)
         modified_data = self._copy_data()
-        modified_data['signal'] = np.random.permutation(modified_data['signal'].values)
+        modified_data["signal"] = np.random.permutation(modified_data["signal"].values)
         return modified_data
-    
+
     def reverse_signal(self):
         modified_data = self._copy_data()
-        modified_data['signal'] = modified_data['signal'].values[::-1]
+        modified_data["signal"] = modified_data["signal"].values[::-1]
         return modified_data
 
     def log_transform_signal(self):
         modified_data = self._copy_data()
         # make sure that the signal is positive with abs
-        modified_data['signal'] = np.abs(modified_data['signal'])
-        modified_data['signal'] = np.log(modified_data['signal'])
+        modified_data["signal"] = np.abs(modified_data["signal"])
+        modified_data["signal"] = np.log(modified_data["signal"])
         return modified_data

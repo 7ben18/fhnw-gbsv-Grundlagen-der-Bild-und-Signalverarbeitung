@@ -7,6 +7,19 @@ from skimage import morphology
 
 
 def plot_2_images(image1, image2, titles, cmaps=None):
+    """
+    Plot two images side by side with specified titles and colormaps.
+
+    Args:
+        image1 (numpy.ndarray): The first input image.
+        image2 (numpy.ndarray): The second input image.
+        titles (list): List of two titles for the images.
+        cmaps (list, optional): List of two colormaps to use for displaying the images. Default is None,
+                                which uses "gray" colormap for both images.
+
+    Returns:
+        None
+    """
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
     images = [image1, image2]
@@ -29,6 +42,19 @@ def plot_three_images(
     cmap: str = "gray",
     titles: list[str] = None,
 ):
+    """
+    Plot three images side by side with optional titles and specified colormap.
+
+    Args:
+        image1 (numpy.ndarray): The first input image.
+        image2 (numpy.ndarray): The second input image.
+        image3 (numpy.ndarray): The third input image.
+        cmap (str, optional): Colormap to use for displaying the images. Default is "gray".
+        titles (list of str, optional): List of three titles for the images. Default is None.
+
+    Returns:
+        None
+    """
     fig, ax = plt.subplots(1, 3, figsize=(20, 6))
     ax[0].imshow(image1, cmap=cmap)
     ax[0].axis("off")
@@ -46,6 +72,20 @@ def plot_three_images(
 
 
 def display_images(original_image, segmentation_image, grey_image, mask, title):
+    """
+    Display multiple images side by side with their titles.
+
+    Args:
+        original_image (numpy.ndarray): The original input image.
+        segmentation_image (numpy.ndarray): The segmented image.
+        grey_image (numpy.ndarray): The grayscale segmentation image.
+        mask (numpy.ndarray): The segmentation mask.
+        title (str): The title for the segmentation image.
+
+    Returns:
+        None
+
+    """
     fig, axes = plt.subplots(1, 4, figsize=(18, 6))
     axes[0].imshow(original_image)
     axes[0].set_title(
@@ -67,6 +107,18 @@ def display_images(original_image, segmentation_image, grey_image, mask, title):
 def apply_color_threshold(
     image, threshold_channel_r, threshold_channel_g, threshold_channel_b
 ):
+    """
+    Apply color thresholding to an image to filter out specific color channels.
+
+    Args:
+        image (numpy.ndarray): The input color image.
+        threshold_channel_r (int): Threshold value for the red channel.
+        threshold_channel_g (int): Threshold value for the green channel.
+        threshold_channel_b (int): Threshold value for the blue channel.
+
+    Returns:
+        numpy.ndarray: The filtered color image.
+    """
     filtered_image = image.copy()
 
     filtered_image[filtered_image[:, :, 0] < threshold_channel_r] = 0
@@ -79,6 +131,20 @@ def apply_color_threshold(
 def threshold_filter(
     image_path, export_path, threshold_r, threshold_g, threshold_b, save_image=True
 ):
+    """
+    Apply thresholding to filter specific color channels in an image.
+
+    Args:
+        image_path (str): Path to the input image.
+        export_path (str): Path to export the filtered image.
+        threshold_r (int): Threshold value for the red channel.
+        threshold_g (int): Threshold value for the green channel.
+        threshold_b (int): Threshold value for the blue channel.
+        save_image (bool, optional): Whether to save the filtered image. Default is True.
+
+    Returns:
+        None
+    """
     image = Image.open(image_path)
     image_array = np.array(image)
 
@@ -98,6 +164,19 @@ def threshold_filter(
 def threshold_filter_all_colors(
     export_path, import_path, range_r=(0, 1), range_g=(0, 1), range_b=(0, 1)
 ):
+    """
+    Apply threshold filtering to an image for all possible color channel combinations within specified ranges.
+
+    Args:
+        export_path (str): Path to export the filtered images.
+        import_path (str): Path to the input image.
+        range_r (tuple, optional): Range for the red channel threshold. Default is (0, 1).
+        range_g (tuple, optional): Range for the green channel threshold. Default is (0, 1).
+        range_b (tuple, optional): Range for the blue channel threshold. Default is (0, 1).
+
+    Returns:
+        None
+    """
     if not os.listdir(export_path):
         for r in range(range_r[0], range_r[1]):
             for g in range(range_g[0], range_g[1]):
@@ -108,10 +187,29 @@ def threshold_filter_all_colors(
 
 
 def convert_to_grayscale(image):
+    """
+    Convert an image to grayscale.
+
+    Args:
+        image (PIL.Image.Image): The input image.
+
+    Returns:
+        PIL.Image.Image: The grayscale image.
+    """
     return image.convert("L")
 
 
 def extract_object(orginal_image, mask):
+    """
+    Extract an object from the original image using a binary mask.
+
+    Args:
+        orginal_image (numpy.ndarray): The original input image.
+        mask (numpy.ndarray): The binary mask.
+
+    Returns:
+        numpy.ndarray: The extracted object.
+    """
     mask[mask > 0] = 1
     if mask.ndim == 2:
         mask_3_channels = np.dstack((mask, mask, mask))
@@ -122,11 +220,31 @@ def extract_object(orginal_image, mask):
 
 
 def skeleton(image: np.array):
+    """
+    Apply skeletonization to a binary image.
+
+    Args:
+        image (numpy.ndarray): The binary input image.
+
+    Returns:
+        numpy.ndarray: The skeletonized image.
+    """
     skeleton = morphology.skeletonize(image)
     return skeleton
 
 
 def n_pixel_in_mask(binary_mask: np.array, relativ=False, return_value=False) -> int:
+    """
+    Calculate the number of pixels in a binary mask.
+
+    Args:
+        binary_mask (numpy.ndarray): The binary mask.
+        relativ (bool, optional): Calculate the relative number of pixels. Default is False.
+        return_value (bool, optional): Return the total, absolute, and relative number of pixels. Default is False.
+
+    Returns:
+        int or tuple: The total number of pixels, absolute number of pixels, and relative number of pixels (if return_value=True)
+    """
     total_pixel = binary_mask.size
     print(f"Total number of pixel: {total_pixel}")
     if relativ:
