@@ -17,6 +17,6 @@ Unter image befinden sich die Daten welche verwendet wurden, um die Aufgabentell
 
 ## export
 
-Hier befinden sich die exportierten Bilder die aus der Challenge entstanden sind..
+Hier befinden sich die exportierten Bilder die aus der Challenge entstanden sind.
 
 

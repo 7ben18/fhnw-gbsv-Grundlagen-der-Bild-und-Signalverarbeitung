@@ -17,12 +17,12 @@ Beachte, dass für die Ausführung von `notebook/gbsv-mc2-ben.ipynb` Python 3.9.
 
 Folgende Dokumente sind in diesem Ordner abgelegt.
 
-| Datei              | Beschreibung                                                                 |
-| ------------------ | ---------------------------------------------------------------------------- |
-| `data`             | Daten import oder export von der Mini-Challenge 2                            |
-| `doc`              | Aufgabenstellung sowie Report                                                |
-| `notebook`         | Jupyter Notebook mit der Lösung der Mini-Challenge 2                         |
-| `src`              | Ausgelagerte Python Funktionen                                               |
-| `requirements.txt` | Python Bibliotheken, die für die Lösung der Mini-Challenge 2 benötigt werden |
-| `README.md`        | Diese Datei                                                                  |
-| `.gitignore`       | Dateien, die nicht in das Git Repository aufgenommen werden sollen           |
+| Datei              | Beschreibung                                                                                                                                                                                   |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`             | Daten [import](data/image/) oder [export](data/export/) von der Mini-Challenge 2                                                                                                               |
+| `doc`              | Aufgabenstellung sowie [Report](doc/gbsv-report-2024-01-06.pdf)                                                                                                                                |
+| `notebook`         | [Jupyter Notebook](notebook/gbsv-mc2-ben.ipynb) mit der Lösung der Mini-Challenge 2                                                                                                            |
+| `src`              | Ausgelagerte Python Funktionen <br> [signal_processor.py](src/signal_processor.py)   <br> [image_processor.py](src/image_processor.py) <br> [feature_descriptor.py](src/feature_descriptor.py) |
+| `requirements.txt` | Python Bibliotheken, die für die Lösung der Mini-Challenge 2 benötigt werden                                                                                                                   |
+| `README.md`        | Diese Datei                                                                                                                                                                                    |
+| `.gitignore`       | Dateien, die nicht in das Git Repository aufgenommen werden sollen                                                                                                                             |
