@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
+from statsmodels.tsa.stattools import ccf
 
 
 def slice_signal(data, slice_length, random_seed=42):
@@ -36,16 +37,16 @@ def plot_data_and_correlation(data, sliced_data, data_name, single_row=True):
     Returns:
         None
     """
-    corr = signal.correlate(data["signal"], sliced_data["signal"], mode="same")
-    corr_norm = corr / np.max(corr)
 
-    corr_norm_df = pd.DataFrame({"lags": corr_norm}).reset_index()
-    corr_norm_df.columns = ["lags", "corr_norm"]
+    corr = ccf(sliced_data["signal"], data["signal"], adjusted=False)
+
+    corr_df = pd.DataFrame({"lags": corr}).reset_index()
+    corr_df.columns = ["lags", "corr_norm"]
 
     if single_row:
-        fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+        fig, axes = plt.subplots(1, 2, figsize=(18, 6))
     else:
-        fig, axes = plt.subplots(3, 1, figsize=(12, 12))
+        fig, axes = plt.subplots(2, 1, figsize=(12, 12))
 
     axes[0].plot(
         data["time"],
@@ -63,17 +64,17 @@ def plot_data_and_correlation(data, sliced_data, data_name, single_row=True):
     axes[0].set_title("Original and Sliced Data")
     axes[0].legend()
 
-    axes[1].plot(corr, label="Crosscorrelation", color="blue")
+    axes[1].plot(
+        corr_df["lags"],
+        corr_df["corr_norm"],
+        label="Normalized Crosscorrelation",
+        color="blue",
+    )
+    axes[1].axhline(y=0, color="black", linestyle="--", alpha=0.5)
     axes[1].set_xlabel("Lag")
     axes[1].set_ylabel("Correlation")
     axes[1].set_title("Correlation")
     axes[1].legend()
-
-    axes[2].plot(corr_norm, label="Normalized Crosscorrelation", color="blue")
-    axes[2].set_xlabel("Lag")
-    axes[2].set_ylabel("Normalized Crosscorrelation")
-    axes[2].set_title("Normalized Crosscorrelation")
-    axes[2].legend()
 
     plt.suptitle(f"Orginal vs. {data_name} Kreuzkorrelation", fontsize=16)
 
