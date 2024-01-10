@@ -67,7 +67,7 @@ def plot_data_and_correlation(data, sliced_data, data_name, single_row=True):
     axes[1].plot(
         corr_df["lags"],
         corr_df["corr_norm"],
-        label="Normalized Crosscorrelation",
+        label="Kreuzkorrelation",
         color="blue",
     )
     axes[1].axhline(y=0, color="black", linestyle="--", alpha=0.5)
